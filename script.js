@@ -1,4 +1,5 @@
 const GRID_CONTAINER_SIZE = 640;
+const PAINT_RANDOM_COLORS = false;
 
 const gridContainer = document.querySelector('.grid-container');
 const buttonGridSize = document.querySelector('.button-grid-size');
@@ -12,6 +13,14 @@ function getRandomInt(max) {
 
 function getRandomColor() {
     return `rgb(${getRandomInt(256)},${getRandomInt(256)},${getRandomInt(256)})`;
+}
+
+function paintGridCell(gridCell) {
+    if (PAINT_RANDOM_COLORS) {
+        gridCell.style.backgroundColor = getRandomColor();
+    } else {
+        gridCell.style.backgroundColor = 'black';   
+    }
 }
 
 function createGrid(cellAmount = 16) {
@@ -35,7 +44,7 @@ function createGrid(cellAmount = 16) {
             return;
         }
 
-        event.target.style.backgroundColor = getRandomColor();
+        paintGridCell(event.target);
     });
 }
 
