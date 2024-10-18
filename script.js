@@ -1,12 +1,14 @@
-const GRID_CONTAINER_SIZE = 640;
-const USE_RANDOM_COLORS = true;
-const USE_DARKENING = true;
+const DEFAULT_GRID_SIZE = 16;
 
 const gridContainer = document.querySelector('.grid-container');
-const buttonGridSize = document.querySelector('.button-grid-size');
+const buttonRandomColors = document.querySelector('.toggle-random-colors');
+const buttonDarkening = document.querySelector('.toggle-darkening');
+const buttonGridSize = document.querySelector('.change-grid-size');
+const gridSizeDisplay = document.querySelector('.grid-size');
 
-gridContainer.style.width = GRID_CONTAINER_SIZE + 'px';
-gridContainer.style.height = GRID_CONTAINER_SIZE + 'px';
+let currentGridSize;
+let useRandomColors = false;
+let useDarkening = false;
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -21,7 +23,7 @@ function paintGridCell(gridCell) {
     const isOpaque = gridCell.style.opacity === 1;
 
     if (!isColored) {
-        if (USE_RANDOM_COLORS) {
+        if (useRandomColors) {
             gridCell.style.backgroundColor = getRandomColor();
         } else {
             gridCell.style.backgroundColor = 'black';
@@ -29,7 +31,7 @@ function paintGridCell(gridCell) {
     }
 
     if (!isOpaque) {
-        if (USE_DARKENING) {
+        if (useDarkening) {
             gridCell.style.opacity = parseFloat(gridCell.style.opacity) + 0.1;
         } else {
             gridCell.style.opacity = 1;
@@ -37,40 +39,51 @@ function paintGridCell(gridCell) {
     }
 }
 
-function createGrid(cellAmount = 16) {
-    const gridCellSize = GRID_CONTAINER_SIZE / cellAmount;
+function createGrid(gridSize = DEFAULT_GRID_SIZE) {
+    const gridPixelSize = gridContainer.clientWidth;
+    const gridCellPixelSize = gridPixelSize / gridSize;
 
     while(gridContainer.lastChild) {
         gridContainer.removeChild(gridContainer.lastChild);
     }
 
-    for (let i = 0; i < cellAmount ** 2; i++) {
+    for (let i = 0; i < gridSize ** 2; i++) {
         const gridCell = document.createElement('div');
 
-        gridCell.style.width = gridCellSize + 'px';
-        gridCell.style.height = gridCellSize + 'px';
+        gridCell.style.width = gridCellPixelSize + 'px';
+        gridCell.style.height = gridCellPixelSize + 'px';
         gridCell.style.opacity = 0;
 
         gridContainer.appendChild(gridCell);
     }
 
-    gridContainer.addEventListener('mouseover', (event) => {
-        if (event.target === gridContainer) {
-            return;
-        }
-
-        paintGridCell(event.target);
-    });
+    gridSizeDisplay.innerText = `Grid size: ${gridSize}x${gridSize}`;
 }
 
+gridContainer.addEventListener('mouseover', (event) => {
+    if (event.target != gridContainer) {
+        paintGridCell(event.target);
+    }
+});
+
 buttonGridSize.addEventListener('click', () => {
-    let cellAmount;
+    let gridSize;
 
     do {
-        cellAmount = parseInt(prompt('Enter grid size in cells', 16));        
-    } while (!cellAmount || cellAmount < 1 || cellAmount > 100);
+        gridSize = parseInt(prompt('Enter grid size (max 100)', 16));        
+    } while (!gridSize || gridSize < 1 || gridSize > 100);
 
-    createGrid(cellAmount);
+    createGrid(gridSize);
 })
+
+buttonRandomColors.addEventListener('click', () => {
+    useRandomColors = !useRandomColors;
+    buttonRandomColors.classList.toggle('enabled');
+});
+
+buttonDarkening.addEventListener('click', () => {
+    useDarkening = !useDarkening;
+    buttonDarkening.classList.toggle('enabled');
+});
 
 createGrid();

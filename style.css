@@ -12,7 +12,7 @@ body {
 
 .container {
   margin: 0 auto;
-  padding: 2rem;
+  padding-top: 2rem;
   width: fit-content;
 }
 
@@ -22,16 +22,19 @@ h1 {
 }
 
 .options {
-  width: 100%;
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
 }
 
 .options-left button {
   margin-right: 0.5rem;
 }
+
+.options-right span {
+  font-weight: 700;
+  margin-right: 0.5rem;
+} 
 
 button {
   font-size: 1rem;
@@ -40,7 +43,20 @@ button {
   font-weight: 700;
 }
 
+button:hover {
+  filter: brightness(85%);
+}
+
+button:active {
+  filter: brightness(60%);
+}
+
+.enabled {
+  background-color: #a3e635;
+}
+
 .grid-container {
+  width: 640px;
   border: 0.5rem solid;
   box-sizing: content-box;
   display: flex;
