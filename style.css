@@ -7,16 +7,15 @@
 body {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .grid-container {
+  border: 1px solid;
   box-sizing: content-box;
   display: flex;
   flex-wrap: wrap;
-}
-
-.border {
-  border: 1px solid;
 }
