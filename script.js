@@ -6,6 +6,14 @@ const buttonGridSize = document.querySelector('.button-grid-size');
 gridContainer.style.width = GRID_CONTAINER_SIZE + 'px';
 gridContainer.style.height = GRID_CONTAINER_SIZE + 'px';
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getRandomColor() {
+    return `rgb(${getRandomInt(256)},${getRandomInt(256)},${getRandomInt(256)})`;
+}
+
 function createGrid(cellAmount = 16) {
     const gridCellSize = GRID_CONTAINER_SIZE / cellAmount;
 
@@ -27,7 +35,7 @@ function createGrid(cellAmount = 16) {
             return;
         }
 
-        event.target.style.backgroundColor = 'black';
+        event.target.style.backgroundColor = getRandomColor();
     });
 }
 
