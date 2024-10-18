@@ -1,5 +1,5 @@
 const GRID_CONTAINER_SIZE = 640;
-const PAINT_RANDOM_COLORS = true;
+const USE_RANDOM_COLORS = true;
 const USE_DARKENING = true;
 
 const gridContainer = document.querySelector('.grid-container');
@@ -21,7 +21,7 @@ function paintGridCell(gridCell) {
     const isOpaque = gridCell.style.opacity === 1;
 
     if (!isColored) {
-        if (PAINT_RANDOM_COLORS) {
+        if (USE_RANDOM_COLORS) {
             gridCell.style.backgroundColor = getRandomColor();
         } else {
             gridCell.style.backgroundColor = 'black';
