@@ -17,6 +17,14 @@ function createGrid(cellAmount = 16) {
 
         gridContainer.appendChild(gridCell);
     }
+
+    gridContainer.addEventListener('mouseover', (event) => {
+        if (event.target === gridContainer) {
+            return;
+        }
+
+        event.target.style.backgroundColor = 'black';
+    });
 }
 
 createGrid();
