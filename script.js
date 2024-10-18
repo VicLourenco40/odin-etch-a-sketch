@@ -1,5 +1,6 @@
 const GRID_CONTAINER_SIZE = 640;
 const PAINT_RANDOM_COLORS = false;
+const USE_DARKENING = true;
 
 const gridContainer = document.querySelector('.grid-container');
 const buttonGridSize = document.querySelector('.button-grid-size');
@@ -16,10 +17,20 @@ function getRandomColor() {
 }
 
 function paintGridCell(gridCell) {
+    const currentOpacity = parseFloat(gridCell.style.opacity);
+
     if (PAINT_RANDOM_COLORS) {
         gridCell.style.backgroundColor = getRandomColor();
+    }
+
+    if (currentOpacity === 1) {
+        return;
+    }
+
+    if (USE_DARKENING) {
+        gridCell.style.opacity = currentOpacity + 0.1;
     } else {
-        gridCell.style.backgroundColor = 'black';   
+        gridCell.style.opacity = 1;
     }
 }
 
@@ -35,6 +46,8 @@ function createGrid(cellAmount = 16) {
 
         gridCell.style.width = gridCellSize + 'px';
         gridCell.style.height = gridCellSize + 'px';
+        gridCell.style.backgroundColor = 'black';
+        gridCell.style.opacity = 0;
 
         gridContainer.appendChild(gridCell);
     }
