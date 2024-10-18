@@ -12,7 +12,11 @@ body {
 }
 
 .grid-container {
+  box-sizing: content-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.border {
   border: 1px solid;
-  width: 640px;
-  height: 640px;
 }
