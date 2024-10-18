@@ -32,7 +32,11 @@ function createGrid(cellAmount = 16) {
 }
 
 buttonGridSize.addEventListener('click', () => {
-    const cellAmount = parseInt(prompt('Grid size', 16));
+    let cellAmount;
+
+    do {
+        cellAmount = parseInt(prompt('Enter grid size in cells', 16));        
+    } while (!cellAmount || cellAmount < 1 || cellAmount > 100);
 
     createGrid(cellAmount);
 })
