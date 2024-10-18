@@ -19,7 +19,7 @@ function getRandomColor() {
 }
 
 function paintGridCell(gridCell) {
-    const isColored = Boolean(gridCell.style.backgroundColor);
+    const isColored = !!gridCell.style.backgroundColor;
     const isOpaque = gridCell.style.opacity === 1;
 
     if (!isColored) {
@@ -57,6 +57,7 @@ function createGrid(gridSize = DEFAULT_GRID_SIZE) {
         gridContainer.appendChild(gridCell);
     }
 
+    currentGridSize = gridSize;
     gridSizeDisplay.innerText = `Grid size: ${gridSize}x${gridSize}`;
 }
 
@@ -70,7 +71,7 @@ buttonGridSize.addEventListener('click', () => {
     let gridSize;
 
     do {
-        gridSize = parseInt(prompt('Enter grid size (max 100)', 16));        
+        gridSize = parseInt(prompt('Enter grid size (max 100)', currentGridSize));        
     } while (!gridSize || gridSize < 1 || gridSize > 100);
 
     createGrid(gridSize);
