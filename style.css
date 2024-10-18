@@ -33,7 +33,7 @@ h1 {
 .options-right span {
   font-weight: 700;
   margin-right: 0.5rem;
-} 
+}
 
 button {
   font-size: 1rem;
@@ -55,8 +55,8 @@ button:active {
 }
 
 .grid-container {
-  width: 640px;
   border: 0.5rem solid;
+  width: 640px;
   display: flex;
   flex-wrap: wrap;
 }

@@ -71,7 +71,7 @@ buttonGridSize.addEventListener('click', () => {
     let gridSize;
 
     do {
-        gridSize = parseInt(prompt('Enter grid size (max 100)', currentGridSize));        
+        gridSize = parseInt(prompt('Enter grid size (max. 100)', currentGridSize));
     } while (!gridSize || gridSize < 1 || gridSize > 100);
 
     createGrid(gridSize);
